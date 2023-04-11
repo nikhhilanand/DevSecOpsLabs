@@ -13,17 +13,22 @@ if [ ! -d "$DATA_DIRECTORY" ]; then
     chmod -R 777 "$REPORT_DIRECTORY"
 fi
 
+if [ ! -d "$CACHE_DIRECTORY" ]; then
+    echo "Initially creating persistent directory: $CACHE_DIRECTORY"
+    mkdir -p "$CACHE_DIRECTORY"
+fi
+
 # Make sure we are using the latest version
 docker pull owasp/dependency-check
 
 docker run --rm \
-    --volume $(pwd):/src \
-    --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data \
-    --volume "$REPORT_DIRECTORY":/report \
-    owasp/dependency-check \
+    --volume $(pwd):/src:z \
+    --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data:z \
+    --volume $(pwd)/odc-reports:/report:z \
+    owasp/dependency-check:$DC_VERSION \
     --scan /src \
     --format "ALL" \
-    --project "My OWASP Dependency Check Project" \
+    --project "$DC_PROJECT" \
     --out /report
-    # Use suppression like this: (/src == $pwd)
+    # Use suppression like this: (where /src == $pwd)
     # --suppression "/src/security/dependency-check-suppression.xml"
