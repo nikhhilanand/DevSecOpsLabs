@@ -15,6 +15,14 @@ pipeline{
 			}
 		}
 		
+		stage ('Check-Git-Secrets'){
+			steps{
+				sh 'rm output || true'
+				sh 'docker run gesellix/trufflehog --json https://github.com/nikhhilanand/DevSecOpsLabs.git > output'
+				sh 'cat output'
+			}	
+		}
+		
 		stage ('Build'){
 			steps{
 				sh 'mvn clean package'
