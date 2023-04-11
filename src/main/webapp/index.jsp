@@ -9,7 +9,10 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Devsecops Course</title>
-
+    <!-- Comments For Login Credentials
+        Username: admin
+        password: admin
+    -->
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
