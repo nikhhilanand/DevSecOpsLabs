@@ -14,7 +14,7 @@ pipeline{
 				'''	
 			}
 		}
-		"""
+		/**
 		stage ('Check-Git-Secrets'){
 			steps{
 				sh 'rm output || true'
@@ -22,7 +22,7 @@ pipeline{
 				sh 'cat output'
 			}	
 		}
-		"""
+		**/
 		stage ('Source Composition Analysis') {
 		      steps {
 				 sh 'rm owasp-* || true'
