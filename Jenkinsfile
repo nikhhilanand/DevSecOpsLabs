@@ -44,8 +44,8 @@ pipeline{
 		
 		stage ('SAST') {
 			steps {
-				withSonarQubeEnv('Sonarqube') {
-					sh 'mvn sonar:sonar'
+				withSonarQubeEnv('SonarQube') {
+					sh 'mvn SonarQube:SonarQube'
 					//sh 'cat target/sonar/report-task.txt'
 				       }
 			}
