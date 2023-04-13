@@ -24,7 +24,7 @@ pipeline{
 				sh 'cat output'
 			}	
 		}
-		**/
+		
 		stage ('Source Composition Analysis') {
 		      steps {
 				 sh 'rm web* || true'
@@ -35,13 +35,14 @@ pipeline{
 				 //sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
 		      }
 		 }
+		**/
 		
 		stage ('Build'){
 			steps{
 				sh 'mvn clean package'
 			}	
 		}
-		
+		/**
 		stage ('SAST') {
 			steps {
 				withSonarQubeEnv('SonarQube') {
@@ -50,7 +51,7 @@ pipeline{
 				       }
 			}
 		}
-		
+		**/
 		stage ('Deploy-To-Tomcat') {
 		    	steps {
 		   		sshagent(['de46408b-0391-4f62-85f4-240594db4874']) {
