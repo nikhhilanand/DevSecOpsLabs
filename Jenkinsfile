@@ -42,6 +42,15 @@ pipeline{
 			}	
 		}
 		
+		stage ('SAST') {
+			steps {
+				withSonarQubeEnv('Sonarqube') {
+					sh 'mvn sonar:sonar'
+					sh 'cat target/sonar/report-task.txt'
+				       }
+			}
+		}
+		
 		stage ('Deploy-To-Tomcat') {
 		    	steps {
 		   		sshagent(['de46408b-0391-4f62-85f4-240594db4874']) {
